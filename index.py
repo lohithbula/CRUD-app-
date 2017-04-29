@@ -8,13 +8,13 @@ salaries = []
 
 def employeedata_index():
 	mynames_list = employeedata.find_names()
-	for x in mynames_list:
+	'''for x in mynames_list:
 		salaries.append(int(x['salary']))
 		avg = sum(salaries)/len(salaries)
 		minima = min(salaries)
 		maxima = max(salaries)
 		mynames_list.append({'average':avg,'minima':minima,'maxima':maxima})
-		#return mynames_list
+		#return mynames_list'''
 	return bottle.template('index', dict(mynames = mynames_list))
 @bottle.route('/newemployee', method='POST')
 def insert_newemployee():
@@ -43,13 +43,10 @@ def update():
 
 #This is to setup the connection
 
-#First, setup a connection string. My server is running on this computer so localhost is OK
+
 connection_string = "mongodb://localhost"
-#Next, let PyMongo know about the MongoDB connection we want to use.  PyMongo will manage the connection pool
 connection = pymongo.MongoClient(connection_string)
-#Now we want to set a context to the names database we created using the mongo interactive shell
 database = connection.names
-#Finally, let out data access object class we built which acts as our data layer know about this
 employeedata = employeeDb.employeeDb(database)
 
 bottle.debug(True)
