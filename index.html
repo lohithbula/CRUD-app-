@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CRUD App</title>
+    <style type="text/css">
+      body {font-family:sans-serif;color:#4f494f;}
+      
+      h5 {display: inline;}
+      .label {text-align: right}
+      .employees {padding-top: 10px; }
+      .name {width:75%;float:right; padding:3px;margin-top: -300px; }
+      .wrapper { padding-left: 25px; padding-top: 20px}
+      .inputform{
+        float: left;
+        width: 25%;
+
+      }
+      table {
+          border-collapse: collapse;
+          width: 75%;
+            }
+
+      th, td {
+          text-align: left;
+          padding: 8px;
+      }
+
+      tr:nth-child(even){background-color: #f2f2f2}
+
+      th {
+          background-color: #4CAF50;
+          color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+    <div class="inputform">
+      <h3>Employees List</h3>
+      <div class="employees_input" >
+      <form method="post" class="form" action="/newemployee">
+        Name: <input type="text" name="name"/> <br>
+        Salary: <input type="number" name="salary"/>
+        <input type="submit" value='Add'/>
+      </form>
+
+      </div>
+      <h3>Delete a Employee</h3>
+      <form method="post" class="form" action="/delete">
+        Name: <input type="text" name="delname"/> <br> 
+        <input type="submit" value='Delete'/>
+      </form>
+      <form method="post" class="form" action="/deleteall">
+        <input type="submit" value='Delete All'/>
+      </form>
+      <h3>Update an Employee</h3>
+      <form method="post" class="form" action="/update">
+        Name: <input type="text" name="updatename"/> <br> 
+        Salary: <input type="text" name="updatesalary"> <br>
+        <input type="submit" value='Update'/>
+      </form>
+     </div>
+     <div class="stats">
+    %for names in mynames:
+
+      <h3>Average Salary :</h3> {{names['average']}}
+      <h3>Maximum Salary :</h3> {{['maxima']}}
+      <h3>Minimum Salary :</h3>{{['minima']}}
+    
+    %end
+
+     </div>
+     <div class="employees">
+        <div class="name">
+          <table>
+            <tr>
+              <th>Employee Name</th>
+              <th>Salary</th>
+            </tr>
+            %for names in mynames:
+            <tr>
+            
+              <td>
+                {{names['name']}}
+              </td>
+              <td>{{names['salary']}} </td>
+              
+            </tr>
+            %end
+          </table>
+          
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
